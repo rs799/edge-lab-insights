@@ -53,6 +53,18 @@ function Dashboard() {
   const [now, setNow] = useState<string>("");
   useEffect(() => { setNow(new Date().toLocaleString()); }, []);
 
+  if (trades.length === 0) {
+    return (
+      <div className="p-6 lg:p-8 space-y-6">
+        <header>
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight">Performance Dashboard</h1>
+          <p className="text-sm text-muted-foreground mt-1">Your edge, measured rep by rep.</p>
+        </header>
+        <EmptyWorkspace />
+      </div>
+    );
+  }
+
   return (
     <div className="p-6 lg:p-8 space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
