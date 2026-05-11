@@ -35,7 +35,7 @@ export function AppSidebar() {
           return (
             <Link
               key={it.to}
-              to={it.to}
+              to={it.to as never}
               className={cn(
                 "group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all",
                 active
@@ -68,7 +68,7 @@ export function MobileTopBar() {
       <div className="font-bold tracking-tight">EdgeLab</div>
       <nav className="ml-auto flex gap-1 overflow-x-auto scrollbar-thin">
         {items.map((it) => (
-          <Link key={it.to} to={it.to} className="px-2 py-1 text-xs text-muted-foreground" activeProps={{ className: "text-foreground" }}>
+          <Link key={it.to} to={it.to as never} className="px-2 py-1 text-xs text-muted-foreground" activeProps={{ className: "text-foreground" }}>
             {it.label}
           </Link>
         ))}
