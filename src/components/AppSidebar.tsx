@@ -4,14 +4,15 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const items = [
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+const items: NavItem[] = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/journal", label: "Journal", icon: BookOpen },
   { to: "/missed", label: "Missed Trades", icon: EyeOff },
   { to: "/analytics", label: "Analytics", icon: BarChart3 },
   { to: "/backtest", label: "Backtest Lab", icon: FlaskConical },
   { to: "/settings", label: "Settings", icon: Settings },
-] as const;
+];
 
 export function AppSidebar() {
   const path = useRouterState({ select: (s) => s.location.pathname });
