@@ -1,9 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
 import type { Trade, MissedTrade } from "./types";
-import { seedTrades, seedMissed } from "./mockData";
 
-const TRADES_KEY = "edgelab.trades.v1";
-const MISSED_KEY = "edgelab.missed.v1";
+const TRADES_KEY = "edgelab.trades.v2";
+const MISSED_KEY = "edgelab.missed.v2";
 
 function read<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
@@ -23,9 +22,7 @@ function write<T>(key: string, value: T) {
 }
 
 export function ensureSeed() {
-  if (typeof window === "undefined") return;
-  if (!localStorage.getItem(TRADES_KEY)) write(TRADES_KEY, seedTrades());
-  if (!localStorage.getItem(MISSED_KEY)) write(MISSED_KEY, seedMissed());
+  // Intentionally no seeding — new users start with an empty workspace.
 }
 
 export function useTrades() {

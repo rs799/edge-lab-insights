@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTrades } from "@/lib/store";
 import { useMissed } from "@/lib/store";
 import { PatternDiagnosis } from "@/components/PatternDiagnosis";
+import { EmptyWorkspace } from "@/components/EmptyWorkspace";
 
 import { computeStats, groupByStat } from "@/lib/analytics";
 import { useMemo, useState } from "react";
@@ -69,6 +70,21 @@ function Analytics() {
       return { session: s, exp, count: subset.length };
     }),
   }));
+
+  if (trades.length === 0) {
+    return (
+      <div className="p-6 lg:p-8 space-y-6">
+        <header>
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight">Advanced Analytics</h1>
+          <p className="text-sm text-muted-foreground mt-1">Find your edge. Sort, group, and compare.</p>
+        </header>
+        <EmptyWorkspace
+          title="Analytics will appear after trades are added"
+          subtitle="Log a few trades to unlock breakdowns, heatmaps, and pattern recognition."
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 lg:p-8 space-y-6">

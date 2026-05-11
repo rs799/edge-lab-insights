@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTrades, useMissed } from "@/lib/store";
 import { computeStats, equityCurve, monthlyPerformance, groupByStat } from "@/lib/analytics";
 import { StatCard } from "@/components/StatCard";
+import { EmptyWorkspace } from "@/components/EmptyWorkspace";
 import {
-  ResponsiveContainer, AreaChart, Area, LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
+  ResponsiveContainer, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, Tooltip, CartesianGrid,
 } from "recharts";
 import { useMemo, useEffect, useState } from "react";
@@ -51,6 +52,18 @@ function Dashboard() {
   const missedWin = missed.filter((m) => m.wouldHaveWon).length;
   const [now, setNow] = useState<string>("");
   useEffect(() => { setNow(new Date().toLocaleString()); }, []);
+
+  if (trades.length === 0) {
+    return (
+      <div className="p-6 lg:p-8 space-y-6">
+        <header>
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight">Performance Dashboard</h1>
+          <p className="text-sm text-muted-foreground mt-1">Your edge, measured rep by rep.</p>
+        </header>
+        <EmptyWorkspace />
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 lg:p-8 space-y-6">
