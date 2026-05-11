@@ -29,8 +29,8 @@ const dimensions = [
   { key: "dow", label: "Day of Week" },
 ] as const;
 
-function Analytics(const { missed } = useMissed();
-) {
+function Analytics() {
+  const { missed } = useMissed();
   const { trades } = useTrades();
   const [dim, setDim] = useState<typeof dimensions[number]["key"]>("ictTags");
 
@@ -76,6 +76,7 @@ function Analytics(const { missed } = useMissed();
         <h1 className="text-2xl lg:text-3xl font-bold tracking-tight">Advanced Analytics</h1>
         <p className="text-sm text-muted-foreground mt-1">Find your edge. Sort, group, and compare.</p>
       </header>
+<PatternDiagnosis trades={trades} missed={missed} />
 
       <section className="rounded-xl glass p-4">
         <div className="flex flex-wrap items-center gap-2 mb-4">
