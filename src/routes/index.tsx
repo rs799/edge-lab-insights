@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTrades, useMissed } from "@/lib/store";
 import { computeStats, equityCurve, monthlyPerformance, groupByStat } from "@/lib/analytics";
 import { StatCard } from "@/components/StatCard";
+import { EmptyWorkspace } from "@/components/EmptyWorkspace";
 import {
-  ResponsiveContainer, AreaChart, Area, LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
+  ResponsiveContainer, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, Tooltip, CartesianGrid,
 } from "recharts";
 import { useMemo, useEffect, useState } from "react";
