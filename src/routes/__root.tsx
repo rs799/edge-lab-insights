@@ -4,6 +4,7 @@ import {
 } from "@tanstack/react-router";
 import { Toaster } from "@/components/ui/sonner";
 import { AppSidebar, MobileTopBar } from "@/components/AppSidebar";
+import { OnboardingGate } from "@/components/OnboardingGate";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -71,6 +72,7 @@ function RootComponent() {
           </main>
         </div>
         <Toaster />
+        <OnboardingGate />
       </div>
     </QueryClientProvider>
   );
