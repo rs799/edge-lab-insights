@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTrades } from "@/lib/store";
 import { useMissed } from "@/lib/store";
 import { PatternDiagnosis } from "@/components/PatternDiagnosis";
+import { EmptyWorkspace } from "@/components/EmptyWorkspace";
 
 import { computeStats, groupByStat } from "@/lib/analytics";
 import { useMemo, useState } from "react";
