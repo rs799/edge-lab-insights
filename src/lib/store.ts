@@ -71,17 +71,38 @@ export function useMissed() {
   return { missed, add, remove };
 }
 
+const PREFS_KEY = "edgelab.prefs.v1";
+const THEME_KEY = "edgelab.theme";
+
 export function exportAll() {
-  return JSON.stringify({
+  const payload = {
+    version: 2,
+    exportedAt: new Date().toISOString(),
+    app: "EdgeLab",
     trades: read<Trade[]>(TRADES_KEY, []),
     missed: read<MissedTrade[]>(MISSED_KEY, []),
-  }, null, 2);
+    preferences: typeof window !== "undefined" ? JSON.parse(localStorage.getItem(PREFS_KEY) || "null") : null,
+    settings: {
+      theme: typeof window !== "undefined" ? localStorage.getItem(THEME_KEY) : null,
+    },
+  };
+  return JSON.stringify(payload, null, 2);
 }
 
 export function importAll(json: string) {
   const data = JSON.parse(json);
-  if (data.trades) write(TRADES_KEY, data.trades);
-  if (data.missed) write(MISSED_KEY, data.missed);
+  if (!data || typeof data !== "object") throw new Error("Invalid backup");
+  if (Array.isArray(data.trades)) write(TRADES_KEY, data.trades);
+  if (Array.isArray(data.missed)) write(MISSED_KEY, data.missed);
+  if (data.preferences && typeof data.preferences === "object") {
+    localStorage.setItem(PREFS_KEY, JSON.stringify(data.preferences));
+    window.dispatchEvent(new CustomEvent("edgelab:prefs"));
+  }
+  if (data.settings?.theme) {
+    localStorage.setItem(THEME_KEY, data.settings.theme);
+    document.documentElement.classList.toggle("light", data.settings.theme !== "dark");
+  }
+  window.dispatchEvent(new CustomEvent("edgelab:store"));
 }
 
 export function clearAll() {

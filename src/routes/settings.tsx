@@ -70,20 +70,20 @@ function Settings() {
       <Section title="Data">
         <Row>
           <div>
-            <Label>Export journal</Label>
-            <p className="text-xs text-muted-foreground mt-0.5">Download all trades and missed setups as JSON.</p>
+            <Label>Export backup</Label>
+            <p className="text-xs text-muted-foreground mt-0.5">Download trades, missed setups, preferences and settings as JSON.</p>
           </div>
-          <Button variant="outline" onClick={onExport}><Download className="h-4 w-4 mr-1.5" /> Export</Button>
+          <Button variant="outline" onClick={onExport}><Download className="h-4 w-4 mr-1.5" /> Export Backup</Button>
         </Row>
         <Row>
           <div>
-            <Label>Import journal</Label>
-            <p className="text-xs text-muted-foreground mt-0.5">Restore from a previous backup file.</p>
+            <Label>Import backup</Label>
+            <p className="text-xs text-muted-foreground mt-0.5">Restore everything from a previous backup file.</p>
           </div>
           <label className="cursor-pointer">
             <input type="file" accept="application/json" className="hidden" onChange={(e) => onImport(e.target.files?.[0])} />
             <span className="inline-flex items-center justify-center px-3 h-9 rounded-md border border-input text-sm hover:bg-accent">
-              <Upload className="h-4 w-4 mr-1.5" /> Import
+              <Upload className="h-4 w-4 mr-1.5" /> Import Backup
             </span>
           </label>
         </Row>
