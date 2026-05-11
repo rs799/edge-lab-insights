@@ -70,6 +70,21 @@ function Analytics() {
     }),
   }));
 
+  if (trades.length === 0) {
+    return (
+      <div className="p-6 lg:p-8 space-y-6">
+        <header>
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight">Advanced Analytics</h1>
+          <p className="text-sm text-muted-foreground mt-1">Find your edge. Sort, group, and compare.</p>
+        </header>
+        <EmptyWorkspace
+          title="Analytics will appear after trades are added"
+          subtitle="Log a few trades to unlock breakdowns, heatmaps, and pattern recognition."
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="p-6 lg:p-8 space-y-6">
       <header>
