@@ -6,7 +6,7 @@ import {
   ResponsiveContainer, AreaChart, Area, LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, Tooltip, CartesianGrid,
 } from "recharts";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [{ title: "Dashboard — EdgeLab" }, { name: "description", content: "Overview of your trading performance, expectancy, and key metrics." }] }),
@@ -49,6 +49,8 @@ function Dashboard() {
   const htf = trades.filter((t) => t.ictTags.includes("HTF aligned"));
   const counter = trades.filter((t) => t.ictTags.includes("counter-trend"));
   const missedWin = missed.filter((m) => m.wouldHaveWon).length;
+  const [now, setNow] = useState<string>("");
+  useEffect(() => { setNow(new Date().toLocaleString()); }, []);
 
   return (
     <div className="p-6 lg:p-8 space-y-6">
@@ -57,7 +59,7 @@ function Dashboard() {
           <h1 className="text-2xl lg:text-3xl font-bold tracking-tight">Performance Dashboard</h1>
           <p className="text-sm text-muted-foreground mt-1">Live snapshot of your edge across {stats.total} trades.</p>
         </div>
-        <div className="text-xs text-muted-foreground font-mono">Updated {new Date().toLocaleString()}</div>
+        <div className="text-xs text-muted-foreground font-mono" suppressHydrationWarning>Updated {now || "—"}</div>
       </header>
 
       <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-9 gap-3">
