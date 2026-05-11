@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useTrades } from "@/lib/store";
+import { useMissed } from "@/lib/store";
+import { PatternDiagnosis } from "@/components/PatternDiagnosis";
+
 import { computeStats, groupByStat } from "@/lib/analytics";
 import { useMemo, useState } from "react";
 import { ResponsiveContainer, BarChart, Bar, Cell, XAxis, YAxis, Tooltip, CartesianGrid, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
@@ -26,7 +29,8 @@ const dimensions = [
   { key: "dow", label: "Day of Week" },
 ] as const;
 
-function Analytics() {
+function Analytics(const { missed } = useMissed();
+) {
   const { trades } = useTrades();
   const [dim, setDim] = useState<typeof dimensions[number]["key"]>("ictTags");
 
