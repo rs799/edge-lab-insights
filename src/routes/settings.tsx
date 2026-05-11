@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { exportAll, importAll, clearAll } from "@/lib/store";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Download, Upload, Trash2, Database } from "lucide-react";
+import { Download, Upload, Trash2, Database, Sparkles } from "lucide-react";
+import { readPrefs } from "@/lib/preferences";
 
 export const Route = createFileRoute("/settings")({
   head: () => ({ meta: [{ title: "Settings — EdgeLab" }] }),
@@ -93,6 +94,25 @@ function Settings() {
           </div>
           <Button variant="outline" className="text-bear hover:text-bear" onClick={() => { if (confirm("Delete all data?")) { clearAll(); toast.success("Cleared"); } }}>
             <Trash2 className="h-4 w-4 mr-1.5" /> Clear
+          </Button>
+        </Row>
+      </Section>
+
+      <Section title="Personalization">
+        <Row>
+          <div>
+            <Label>Onboarding preferences</Label>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              {(() => {
+                const p = typeof window !== "undefined" ? readPrefs() : null;
+                if (!p?.completed) return "Walk through setup to personalize EdgeLab.";
+                const counts = [p.styles, p.symbols, p.sessions, p.confluences, p.psychology, p.goals].reduce((a, b) => a + b.length, 0);
+                return `${counts} preferences saved across style, symbols, sessions and goals.`;
+              })()}
+            </p>
+          </div>
+          <Button variant="outline" onClick={() => window.dispatchEvent(new CustomEvent("edgelab:open-onboarding"))}>
+            <Sparkles className="h-4 w-4 mr-1.5" /> Edit setup
           </Button>
         </Row>
       </Section>
