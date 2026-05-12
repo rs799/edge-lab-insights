@@ -1,4 +1,4 @@
-export type Session = "Asia" | "London" | "NY AM" | "NY Lunch" | "NY PM";
+export type Session = "Asia" | "London" | "NY AM" | "NY Lunch" | "NY PM" | "Off-session";
 export type Direction = "long" | "short";
 export type Outcome = "win" | "loss" | "breakeven";
 export type SetupQuality = "A+" | "A" | "B" | "C";
@@ -15,7 +15,7 @@ export const PSYCH_TAGS = [
   "boredom trade", "overtrading", "late entry", "early entry", "lack of confirmation",
 ] as const;
 
-export const SESSIONS: Session[] = ["Asia", "London", "NY AM", "NY Lunch", "NY PM"];
+export const SESSIONS: Session[] = ["Asia", "London", "NY AM", "NY Lunch", "NY PM", "Off-session"];
 
 export interface Trade {
   id: string;

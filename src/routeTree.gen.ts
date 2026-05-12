@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as RiskLabRouteImport } from './routes/risk-lab'
 import { Route as MissedRouteImport } from './routes/missed'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as BacktestRouteImport } from './routes/backtest'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RiskLabRoute = RiskLabRouteImport.update({
+  id: '/risk-lab',
+  path: '/risk-lab',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MissedRoute = MissedRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/backtest': typeof BacktestRoute
   '/journal': typeof JournalRoute
   '/missed': typeof MissedRoute
+  '/risk-lab': typeof RiskLabRoute
   '/settings': typeof SettingsRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/backtest': typeof BacktestRoute
   '/journal': typeof JournalRoute
   '/missed': typeof MissedRoute
+  '/risk-lab': typeof RiskLabRoute
   '/settings': typeof SettingsRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/backtest': typeof BacktestRoute
   '/journal': typeof JournalRoute
   '/missed': typeof MissedRoute
+  '/risk-lab': typeof RiskLabRoute
   '/settings': typeof SettingsRoute
 }
 export interface FileRouteTypes {
@@ -80,9 +89,17 @@ export interface FileRouteTypes {
     | '/backtest'
     | '/journal'
     | '/missed'
+    | '/risk-lab'
     | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analytics' | '/backtest' | '/journal' | '/missed' | '/settings'
+  to:
+    | '/'
+    | '/analytics'
+    | '/backtest'
+    | '/journal'
+    | '/missed'
+    | '/risk-lab'
+    | '/settings'
   id:
     | '__root__'
     | '/'
@@ -90,6 +107,7 @@ export interface FileRouteTypes {
     | '/backtest'
     | '/journal'
     | '/missed'
+    | '/risk-lab'
     | '/settings'
   fileRoutesById: FileRoutesById
 }
@@ -99,6 +117,7 @@ export interface RootRouteChildren {
   BacktestRoute: typeof BacktestRoute
   JournalRoute: typeof JournalRoute
   MissedRoute: typeof MissedRoute
+  RiskLabRoute: typeof RiskLabRoute
   SettingsRoute: typeof SettingsRoute
 }
 
@@ -109,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/risk-lab': {
+      id: '/risk-lab'
+      path: '/risk-lab'
+      fullPath: '/risk-lab'
+      preLoaderRoute: typeof RiskLabRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/missed': {
@@ -155,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   BacktestRoute: BacktestRoute,
   JournalRoute: JournalRoute,
   MissedRoute: MissedRoute,
+  RiskLabRoute: RiskLabRoute,
   SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
