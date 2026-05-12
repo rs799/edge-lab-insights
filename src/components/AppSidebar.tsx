@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
-  LayoutDashboard, BookOpen, EyeOff, BarChart3, FlaskConical, Settings, TrendingUp,
+  LayoutDashboard, BookOpen, EyeOff, BarChart3, FlaskConical, Settings, TrendingUp, ShieldAlert,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -11,6 +11,7 @@ const items: NavItem[] = [
   { to: "/missed", label: "Missed Trades", icon: EyeOff },
   { to: "/analytics", label: "Analytics", icon: BarChart3 },
   { to: "/backtest", label: "Backtest Lab", icon: FlaskConical },
+  { to: "/risk-lab", label: "Risk Lab", icon: ShieldAlert },
   { to: "/settings", label: "Settings", icon: Settings },
 ];
 
